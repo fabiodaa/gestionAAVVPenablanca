@@ -8,6 +8,7 @@
                 <li><a href="socios.php">Socios</a></li>
                 <li><a href="familias.php">Familias</a></li>
                 <li><a href="pagos.php">Pagos</a></li>
+                <li><a href="emails.php">Lista Emails</a></li>
                 <li><a href="logout.php">Cerrar sesión</a></li>
             </ul>
         </nav>

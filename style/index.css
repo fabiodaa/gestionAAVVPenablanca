@@ -48,7 +48,7 @@ div {
     padding: 10px 20px;
     box-sizing: border-box;
     border: 1px solid red;
-    border-radius: 10px;
+    border-radius: 40px;
 }
 .error{
     width:100%;
