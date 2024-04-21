@@ -1,18 +1,19 @@
 <?php
+    session_set_cookie_params(3600);
     session_start();
     if (isset ($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]==true)  {
-        header("location: home.php");
+        header("location: socios.php");
     }
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <title>Inicio de Sesión</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/assets/logo.png">
 </head>
@@ -26,10 +27,17 @@
     </div>
     <div class="content">
         <form method="post" action="login.php">
-            <input class="texto" required placeholder="Contraseña" type="password" name="password" id="password" required>
             <?php
+                # Muestra el mensaje de contraseña incorrecta si es necesario
                 if (isset($_GET["error"])&&$_GET["error"]==true){
-                    ?> <p class="error">Contraseña incorrecta</p><?php
+                    ?>
+                    <input class="texto-error" required placeholder="Contraseña" type="password" name="password" id="password">
+                    <p class="error">Contraseña incorrecta</p>
+                    <?php
+                }else{
+                    ?>
+                    <input class="texto" required placeholder="Contraseña" type="password" name="password" id="password">
+                    <?php
                 }
             ?>
             <input class="confirmar" type="submit" value="Iniciar Sesión">

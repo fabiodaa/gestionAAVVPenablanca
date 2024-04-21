@@ -1,0 +1,45 @@
+body {
+    background-color: black;
+    color:white
+}
+:is(h1, h2, h3, h4, h5, h6) {
+    color:white
+}
+
+div {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header {
+    background-color: black;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    width: 100px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav ul li:first-child {
+    margin-left: 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
