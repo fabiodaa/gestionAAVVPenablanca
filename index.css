@@ -1,0 +1,40 @@
+body {
+    background-color: black;
+    color:white
+}
+:is(h1, h2, h3, h4, h5, h6) {
+    color:white
+}
+
+div {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    margin-top: 10%;
+}
+.texto{
+    color:white;
+    background-color:black;
+    width:100%;
+    text-align: center;
+    height:45px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.confirmar{
+    margin-top: 10px;
+    color:white;
+    background-color:black;
+    width:50%;
+    height:40px;
+    padding: 10px 10px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    text-align: center;
+    border-radius: 10px;
+}
