@@ -8,7 +8,6 @@ body {
 
 div {
     text-align: center;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -42,4 +41,47 @@ nav ul li:first-child {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+}
+.texto{
+    color:white;
+    background-color:black;
+    text-align: center;
+    height:35px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: calc(20% - 10px);
+    margin-right: 20px;
+    margin-bottom: 0;
+}
+.confirmar{
+    margin-top: 10px;
+    color:white;
+    background-color:black;
+    width: calc(10% - 40px);
+    height:35px;
+    padding: 10px 10px;
+    min-width: 100px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    text-align: center;
+    border-radius: 40px;
+    cursor:pointer;
+}
+@media screen and (max-width: 600px) {
+    .nombreAAVV {
+        display: none;
+    }
+}
+@media screen and (max-width: 700px) {
+    .texto {
+        width: 70%;
+        margin-right: 0; 
+        margin-bottom: 10px;
+    }
+    .confirmar {
+        width: 70%;
+        min-width: 0px;
+    }
 }

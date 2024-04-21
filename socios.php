@@ -28,6 +28,19 @@ $conexion = mysqli_connect($credentials[0], $credentials[1], $credentials[2], $c
 
 <body>
     <?php include 'header.php'; ?>
+    <div>
+        <h1>Socios</h1>
+    </div>
+    <div class="busqueda">
+        <h3>Búsqueda</h3>
+        <div class="barrabusqueda">
+            <form method="get" action=".">
+                <input class="texto" required placeholder="Nombre" type="text" name="nombre" id="nombre">
+                <input class="texto" required placeholder="Apellidos" type="text" name="apellidos" id="apellidos">
+                <input class="confirmar" type="submit" value="Buscar">
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,14 +1,14 @@
 <header>
         <div class="logo">
             <img src="assets/logo.png" alt="Logotipo">
-            <span>AAVV Peñablanca</span>
+            <span class="nombreAAVV">AAVV Peñablanca</span>
         </div>
         <nav>
             <ul>
-                <li><a href="#">Socios</a></li>
-                <li><a href="#">Familias</a></li>
-                <li><a href="#">Pagos</a></li>
-                <li><a href="#">Cerrar sesión</a></li>
+                <li><a href="socios.php">Socios</a></li>
+                <li><a href="familias.php">Familias</a></li>
+                <li><a href="pagos.php">Pagos</a></li>
+                <li><a href="logout.php">Cerrar sesión</a></li>
             </ul>
         </nav>
 </header>
