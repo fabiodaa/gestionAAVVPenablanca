@@ -73,6 +73,10 @@ $row = $socio->fetch_assoc();
             <p>Baja:</p>
             <p><?php if($row["baja"]==1){echo "Sí";} else{echo "No";} ?></p>
         </div>
+    <div class="contenedor">
+        <a <?php echo "href='chStatus.php?id=" . $row["id"] . "'" ?>><button class="action-button"><?php if($row["baja"]==1){echo "Dar de alta";}else{echo "Dar de baja";} ?></button></a>
+        <a <?php echo "href='chfamily.php?id=" . $row["id"] . "'" ?>><button class="action-button">Cambiar de familia</button></a>
+    </div>
     </div>
 
 

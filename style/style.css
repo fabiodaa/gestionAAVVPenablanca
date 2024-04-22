@@ -102,6 +102,7 @@ nav ul li a {
     flex-wrap: wrap;
     width:80%;
     margin:0 auto;
+    justify-content: center;
 }
 
 .campo {
@@ -110,6 +111,21 @@ nav ul li a {
     box-sizing: border-box;
     border:1px solid white;
 }
+.action-button {
+    margin-top: 10px;
+    color:white;
+    background-color:black;
+    width: calc(20% - 40px);
+    height:40px;
+    padding: 2px 2px;
+    min-width: 100px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    text-align: center;
+    border-radius: 40px;
+    cursor:pointer;
+    margin-left:20px;
+}
 @media screen and (max-width: 600px) {
     .nombreAAVV {
         display: none;
@@ -117,6 +133,18 @@ nav ul li a {
     .socios {
         width: 100%;
         overflow-x: scroll;
+    }
+    .contenedor {
+        display: flex;
+        flex-wrap: wrap;
+        width:100%;
+        margin:0 auto;
+    }
+    .campo {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border:1px solid white;
     }
 }
 @media screen and (max-width: 700px) {
