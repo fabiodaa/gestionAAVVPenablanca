@@ -8,9 +8,7 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
     header("location: .");
 }
 
-$credentials = leerArchivo("bbdd.txt");
-
-$conexion = mysqli_connect($credentials[0], $credentials[1], $credentials[2], $credentials[3]);
+$conexion = connect2db();
 
 if(!isset($_GET["nombre"]) || !isset($_GET["apellidos"]) || !isset($_GET["estado"]) || !isset($_GET["ordenar"])){
     $socios=mysqli_query($conexion,"SELECT * FROM socio ORDER BY apellidos");

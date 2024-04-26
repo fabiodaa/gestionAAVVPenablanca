@@ -10,7 +10,7 @@ if (!isset($_POST["password"])){
 }
 else{
     $password = $_POST["password"];
-    $hash=leerArchivo("pwdhash.txt")[0];
+    $hash=leerArchivo("credentials/pwdhash.txt")[0];
     if($hash==hash('sha256', $password)){
         $_SESSION["loggedIn"] = true;
         header("location: socios.php");

@@ -8,9 +8,7 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
     header("location: .");
 }
 
-$credentials = leerArchivo("bbdd.txt");
-
-$conexion = mysqli_connect($credentials[0], $credentials[1], $credentials[2], $credentials[3]);
+$conexion = connect2db();
 
 if (isset($_GET["id"])) {
     $socio = mysqli_query($conexion, "SELECT * FROM socio WHERE id=" . $_GET["id"]);

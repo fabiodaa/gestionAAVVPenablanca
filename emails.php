@@ -8,9 +8,7 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
     header("location: .");
 }
 
-$credentials = leerArchivo("bbdd.txt");
-
-$conexion = mysqli_connect($credentials[0], $credentials[1], $credentials[2], $credentials[3]);
+$conexion = connect2db();
 
 
 $socios = mysqli_query($conexion, "SELECT email FROM socio WHERE email IS NOT NULL");

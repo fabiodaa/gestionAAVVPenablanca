@@ -29,3 +29,12 @@ function fechaFormato($fecha){
     $fecha_time=new DateTime($fecha);
     return date_format($fecha_time,"d/m/Y");
 }
+function connect2db(){
+    $credentials = leerArchivo("credentials/bbdd.txt");
+    $conexion = mysqli_init();
+    mysqli_ssl_set($conexion,'credentials/client-key.pem', 'credentials/client-cert.pem', 'credentials/ca.pem',null,null);
+
+    mysqli_real_connect($conexion,$credentials[0], $credentials[1], $credentials[2], $credentials[3], null, null, MYSQLI_CLIENT_SSL | MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT);
+
+    return $conexion;
+}
