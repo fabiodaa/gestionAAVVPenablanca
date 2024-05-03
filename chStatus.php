@@ -23,7 +23,8 @@ if (isset($_GET["alta"])) {
     if($row["baja"]==1)
         $conexion -> query("UPDATE socio SET baja=0 WHERE id=". $row["id"]."");
     else
-        $conexion -> query("UPDATE socio SET baja=0 WHERE id=". $row["id"]."");
+        $conexion -> query("UPDATE socio SET baja=1 WHERE id=". $row["id"]."");
+    
     header("location: socio.php?id=". $row["id"] ."");
 }
 
