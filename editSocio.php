@@ -10,6 +10,12 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
 
 $conexion = connect2db();
 
+if (isset($_GET["id"])) {
+    $socio = mysqli_query($conexion, "SELECT * FROM socio WHERE id=" . $_GET["id"]);
+} else {
+    header("location: .");
+}
+
 $row = $socio->fetch_assoc();
 
 
