@@ -45,7 +45,7 @@ if (isset($_GET["alta"])) {
 <body>
     <?php include 'header.php'; ?>
     <div>
-        <h1><?php if($row["baja"]==1){ echo "¿Estás seguro de que quieres volver a dar de alta a ".$row["nombre"]." ".$row["apellidos"]."?. Ten en cuenta que la familia debe estar dada de alta para que las cuotas se calculen adecuadamente.";} else{ echo "¿Seguro que quieres dar de baja a ".$row["nombre"]." ".$row["apellidos"]."?"; } ?></h1>
+        <h2><?php if($row["baja"]==1){ echo "¿Estás seguro de que quieres volver a dar de alta a ".$row["nombre"]." ".$row["apellidos"]."? Ten en cuenta que la familia debe estar dada de alta para que las cuotas se calculen adecuadamente.";} else{ echo "¿Seguro que quieres dar de baja a ".$row["nombre"]." ".$row["apellidos"]."?"; } ?></h2>
     </div>
     <div class="contenedor">
         <a <?php echo "href='socio.php?id=" . $row["id"] . "'" ?>><button class="action-button">Cancelar</button></a>
