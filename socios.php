@@ -15,13 +15,13 @@ if(!isset($_GET["nombre"]) || !isset($_GET["apellidos"]) || !isset($_GET["estado
 }
 else{
     if($_GET["estado"]=="todos"){
-        $socios=mysqli_query($conexion,"SELECT * FROM socio WHERE nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
+        $socios=mysqli_query($conexion,"SELECT * FROM socio WHERE nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '%" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
     }
     if($_GET["estado"]=="alta"){
-        $socios=mysqli_query($conexion,"SELECT * FROM socio WHERE baja=0 AND nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
+        $socios=mysqli_query($conexion,"SELECT * FROM socio WHERE baja=0 AND nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '%" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
     }
     if($_GET["estado"]=="baja"){
-        $socios=mysqli_query($conexion,"SELECT * FROM socio WHERE baja=1 AND nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
+        $socios=mysqli_query($conexion,"SELECT * FROM socio WHERE baja=1 AND nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '%" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
     }
 }
 

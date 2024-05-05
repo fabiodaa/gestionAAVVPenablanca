@@ -11,17 +11,17 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
 $conexion = connect2db();
 
 if(!isset($_GET["nombre"]) || !isset($_GET["apellidos"]) || !isset($_GET["estado"]) || !isset($_GET["ordenar"])){
-    $socios=mysqli_query($conexion,"SELECT * FROM cabezaFamilia ORDER BY id");
+    $socios=mysqli_query($conexion,"SELECT * FROM cabezaFamilia ORDER BY apellidos");
 }
 else{
     if($_GET["estado"]=="todos"){
-        $socios=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
+        $socios=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '%" . $_GET['apellidos'] . "%' AND direccion LIKE '%" . $_GET['direccion'] . "%' ORDER BY ".$_GET['ordenar']);
     }
     if($_GET["estado"]=="alta"){
-        $socios=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 AND nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
+        $socios=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 AND nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '%" . $_GET['apellidos'] . "%' AND direccion LIKE '%" . $_GET['direccion'] . "%' ORDER BY ".$_GET['ordenar']);
     }
     if($_GET["estado"]=="baja"){
-        $socios=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=1 AND nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '" . $_GET['apellidos'] . "%' ORDER BY ".$_GET['ordenar']);
+        $socios=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=1 AND nombre LIKE '" . $_GET['nombre'] . "%' AND apellidos LIKE '%" . $_GET['apellidos'] . "%' AND direccion LIKE '%" . $_GET['direccion'] . "%' ORDER BY ".$_GET['ordenar']);
     }
 }
 
@@ -47,6 +47,7 @@ else{
         <h1>Familias</h1>
     </div>
     <div class="busqueda">
+        <a href="addFamily.php"><button class="anadir">Nueva familia</button></a>
         <h3>Filtros</h3>
         <div class="barrabusqueda">
             <form method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">

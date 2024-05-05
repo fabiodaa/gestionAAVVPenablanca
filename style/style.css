@@ -146,6 +146,23 @@ nav ul li a {
     margin-left: 20px;
     flex: 1;
 }
+.anadir{
+    margin-top: 10px;
+    color:white;
+    background-color:black;
+    width: calc(10% - 40px);
+    height:50px;
+    padding: 10px 10px;
+    min-width: 100px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    text-align: center;
+    border-radius: 40px;
+    cursor:pointer;
+}
+.datosFamilia{
+    justify-content: center;
+}
 
 @media screen and (max-width: 600px) {
     .nombreAAVV {
@@ -191,7 +208,7 @@ nav ul li a {
         margin-right: 0;
         margin-bottom: 10px;
     }
-    .confirmar {
+    .confirmar,.anadir {
         width: 70%;
         min-width: 0px;
     }
