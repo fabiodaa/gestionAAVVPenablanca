@@ -126,6 +126,26 @@ nav ul li a {
     cursor:pointer;
     margin-left:20px;
 }
+.editar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.campoEdicion{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.campoEdicion label {
+    width: 150px;
+    text-align: right;
+    margin-right: 10px;
+}
+.campoEdicion input {
+    margin-left: 20px;
+    flex: 1;
+}
+
 @media screen and (max-width: 600px) {
     .nombreAAVV {
         display: none;
@@ -145,6 +165,23 @@ nav ul li a {
         padding: 10px;
         box-sizing: border-box;
         border:1px solid white;
+    }
+    .campoEdicion {
+        flex-direction: column;
+    }
+
+    .campoEdicion label {
+        width: auto;
+        text-align: left;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .campoEdicion input {
+        width: 100%;
+    }
+    .campoEdicion button {
+        width: 100%;
     }
 }
 @media screen and (max-width: 700px) {

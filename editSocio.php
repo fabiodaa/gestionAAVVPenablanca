@@ -18,6 +18,11 @@ if (isset($_GET["id"])) {
 
 $row = $socio->fetch_assoc();
 
+if (isset($_GET["id"]) && isset($_GET["nombre"])){
+    echo "UPDATE socio SET nombre='".$_GET["nombre"] . "',apellidos='".$_GET["apellidos"] . "',fechaNacimiento='".$_GET["fechaNacimiento"] . "',dni='".$_GET["dni"] . "',email='".$_GET["email"] . "' WHERE id=". $row["id"]."";
+    $conexion -> query("UPDATE socio SET nombre='".$_GET["nombre"] . "',apellidos='".$_GET["apellidos"] . "',fechaNacimiento='".$_GET["fechaNacimiento"] . "',dni='".$_GET["dni"] . "',email='".$_GET["email"] . "' WHERE id=". $row["id"]."");
+    header("location: socio.php?id=". $row["id"] ."");
+}
 
 ?>
 
@@ -39,31 +44,41 @@ $row = $socio->fetch_assoc();
         <h1>Editar socio</h1>
     </div>
     <div class="busqueda">
-        <h3>Datos</h3>
+        <h2>Datos</h2>
         <div class="editar">
-            <form method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                <input class="texto" <?php echo 'value="' . $row["nombre"] . '"'; ?> placeholder="Nombre" type="text" name="nombre" id="nombre">
-                <input class="texto" <?php echo 'value="' . $_GET["apellidos"] . '"'; ?> placeholder="Apellidos" type="text" name="apellidos" id="apellidos"><br>
-                <p class="etiqueta">Mostrar</p>
-                <input class="opcion" <?php if(isset($_GET['estado']) && $_GET['estado'] == 'alta') echo ' checked'; ?> type="radio" id="alta" name="estado" value="alta">
-                <label for="alta">Alta</label>
-                <input class="opcion" <?php if(isset($_GET['estado']) && $_GET['estado'] == 'baja') echo ' checked'; ?> type="radio" id="baja" name="estado" value="baja">
-                <label for="baja">Baja</label>
-                <input class="opcion" <?php if(!isset($_GET['estado']) || $_GET['estado'] == 'todos') echo ' checked'; ?> type="radio" id="todos" name="estado" value="todos">
-                <label for="todos">Todos</label><br>
-                <p class="etiqueta">Ordenar por</p>
-                <input class="opcion" <?php if(isset($_GET['ordenar']) && $_GET['ordenar'] == 'nombre') echo ' checked'; ?> type="radio" id="nombre" name="ordenar" value="nombre">
-                <label for="nombre">Nombre</label>
-                <input class="opcion" <?php if(!isset($_GET['ordenar']) || $_GET['ordenar'] == 'apellidos') echo ' checked'; ?> type="radio" id="apellidos" name="ordenar" value="apellidos">
-                <label for="apellidos">Apellidos</label>
-                <input class="opcion" <?php if(isset($_GET['ordenar']) && $_GET['ordenar'] == 'id') echo ' checked'; ?> type="radio" id="num" name="ordenar" value="id">
-                <label for="num">Nº de socio</label>
-                <input class="opcion" <?php if(isset($_GET['ordenar']) && $_GET['ordenar'] == 'fechaNacimiento') echo ' checked'; ?> type="radio" id="fecha" name="ordenar" value="fechaNacimiento">
-                <label for="fecha">Fecha de nacimiento</label><br>
-                <input class="confirmar" type="submit" value="Buscar">
+            <form method="get" action="editSocio.php">
+                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                <div class="campoEdicion">
+                    <label for="nombre">Nombre</label>
+                    <input required class="texto" <?php echo 'value="' . $row["nombre"] . '"'; ?> placeholder="Nombre"
+                        type="text" name="nombre" id="nombre">
+                </div>
+                <div class="campoEdicion">
+                    <label for="apellidos">Apellidos</label>
+                    <input required class="texto" <?php echo 'value="' . $row["apellidos"] . '"'; ?>
+                        placeholder="Apellidos" type="text" name="apellidos" id="apellidos"><br>
+                </div>
+                <div class="campoEdicion">
+                    <label for="fechaNac">Fecha de nacimiento</label>
+                    <input required class="texto" <?php echo 'value="' . $row["fechaNacimiento"] . '"'; ?>
+                        placeholder="Fecha de nacimiento" type="date" name="fechaNacimiento" id="fechaNacimiento"><br>
+                </div>
+                <div class="campoEdicion">
+                    <label for="dni">DNI</label>
+                    <input class="texto" <?php echo 'value="' . $row["dni"] . '"'; ?> placeholder="DNI"
+                        type="text" name="dni" id="dni"><br>
+                </div>
+                <div class="campoEdicion">
+                    <label for="email">Email</label>
+                    <input class="texto" <?php echo 'value="' . $row["email"] . '"'; ?> placeholder="E-Mail"
+                        type="text" name="email" id="email"><br>
+                </div>
+                <div class="campoEdicion">
+                    <a href="socio.php?id=<?php echo $row["id"] ?>"><button type="button" class="confirmar">Cancelar</button></a>
+                    <input class="confirmar" type="submit" value="Confirmar">
+                </div>
             </form>
         </div>
-    </div>
     </div>
 
 
