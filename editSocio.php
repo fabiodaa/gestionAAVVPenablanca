@@ -19,7 +19,6 @@ if (isset($_GET["id"])) {
 $row = $socio->fetch_assoc();
 
 if (isset($_GET["id"]) && isset($_GET["nombre"])){
-    echo "UPDATE socio SET nombre='".$_GET["nombre"] . "',apellidos='".$_GET["apellidos"] . "',fechaNacimiento='".$_GET["fechaNacimiento"] . "',dni='".$_GET["dni"] . "',email='".$_GET["email"] . "' WHERE id=". $row["id"]."";
     $conexion -> query("UPDATE socio SET nombre='".$_GET["nombre"] . "',apellidos='".$_GET["apellidos"] . "',fechaNacimiento='".$_GET["fechaNacimiento"] . "',dni='".$_GET["dni"] . "',email='".$_GET["email"] . "' WHERE id=". $row["id"]."");
     header("location: socio.php?id=". $row["id"] ."");
 }
