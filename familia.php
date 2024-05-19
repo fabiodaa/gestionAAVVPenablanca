@@ -69,6 +69,7 @@ $cabeza = $cabeza->fetch_assoc();
                } else {
                    echo "Dar de baja";
                } ?></button></a>
+        <a <?php echo "href='addSocio.php?familia=" . $row["id"] . "'" ?>><button class="action-button">Añadir socio</button></a>
     </div>
     <div>
         <h3>Editar direccion</h3>
@@ -105,7 +106,7 @@ $cabeza = $cabeza->fetch_assoc();
                     echo "<td><a href='socio.php?id=" . $socio["id"] . "'><button class=\"ver\">Ver</button></a></td>";
                     if($socio["id"]==$row["principal"]) echo "<td>Ya lo es</td>";
                     elseif($socio["baja"]==1) echo "<td>Está de baja</td>";
-                    else echo "<td><a href='chCabeza.php?id=" . $socio["id"] . "&familia=". $row["id"] ."'><button class=\"principal\">Hacer cabeza de familia</button></a></td>";
+                    else echo "<td><a href='chCabeza.php?socio=" . $socio["id"] . "&familia=". $row["id"] ."'><button class=\"principal\">Hacer cabeza de familia</button></a></td>";
                     echo "</tr>";
                 }
                 echo "</table>";
