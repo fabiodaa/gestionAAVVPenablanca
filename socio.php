@@ -18,6 +18,10 @@ if (isset($_GET["id"])) {
 
 $row = $socio->fetch_assoc();
 
+$cabeza = mysqli_query($conexion, "SELECT esCabeza(". $_GET["id"].") AS esCabeza");
+$esCabeza=$cabeza->fetch_assoc();
+
+
 
 ?>
 
@@ -73,7 +77,7 @@ $row = $socio->fetch_assoc();
         </div>
     <div class="contenedor">
         <a <?php echo "href='chStatus.php?id=" . $row["id"] . "'" ?>><button class="action-button"><?php if($row["baja"]==1){echo "Dar de alta";}else{echo "Dar de baja";} ?></button></a>
-        <a <?php echo "href='chFamily.php?id=" . $row["id"] . "'" ?>><button class="action-button">Cambiar de familia</button></a>
+        <?php if($esCabeza["esCabeza"]==0){?> <a <?php echo "href='chFamily.php?id=" . $row["id"] . "'" ?>><button class="action-button">Cambiar de familia</button></a><?php } ?>
         <a <?php echo "href='editSocio.php?id=" . $row["id"] . "'" ?>><button class="action-button">Editar</button></a>
     </div>
     </div>

@@ -10,9 +10,25 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
 
 $conexion = connect2db();
 
+$familias=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 ORDER BY apellidos");
+
+
 if(isset($_GET["id"])&&isset($_GET["newFamily"])){
-    $query="UPDATE socio SET familia=". $_GET["newFamily"];
+    $query="UPDATE socio SET familia=". $_GET["newFamily"] ." WHERE id=".$_GET["id"]."";
     $socio = mysqli_query($conexion, $query);
+    header("location: socio.php?id=".$_GET["id"]);
+
+}
+
+if(isset($_GET["id"])&&isset($_GET["create"])&&isset($_GET["direccion"])){
+    if($_GET["create"]==true){
+        $query="INSERT into familia(direccion,principal) VALUES ('". $_GET["direccion"]."',".$_GET["id"].")";
+        $socio = mysqli_query($conexion, $query);
+        $ultimo_id_familia = mysqli_insert_id($conexion);
+        $query="UPDATE socio SET familia=".$ultimo_id_familia." WHERE id=".$_GET["id"]."";
+        $socio = mysqli_query($conexion, $query);
+    }
+
     header("location: socio.php?id=".$_GET["id"]);
 
 }
@@ -58,12 +74,13 @@ if(isset($_GET["id"])&&isset($_GET["newFamily"])){
             <form method="get" action="chFamily.php">
                 <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>">
                 <div class="campoEdicion">
-                    <label for="opciones">Familia</label>
-                    <select class="confirmar" name="opciones" id="opciones">
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
-                    <option value="opcion4">Opción 4</option>
+                    <label for="newFamily">Familia</label>
+                    <select class="confirmar" name="newFamily" id="newFamily">
+                    <?php 
+                    while($row = $familias->fetch_assoc()) {
+                        echo "<option value='".$row["id"]."'>".$row["direccion"]." - ".$row["nombre"]." ".$row["apellidos"]."</option>";
+                    }
+                    ?>
                 </div>
                 <div class="campoEdicion">
                     <a href="<?php echo "socio.php?id=".$_GET["id"]?>"><button type="button" class="confirmar">Cancelar</button></a>
