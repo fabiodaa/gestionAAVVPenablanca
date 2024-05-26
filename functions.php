@@ -38,3 +38,26 @@ function connect2db(){
 
     return $conexion;
 }
+function calcularCuota($familia,$conexion){
+    $cuota=0;
+
+    $cuotas= mysqli_query($conexion,"SELECT * FROM tarifa");
+    $familia = mysqli_query($conexion,"SELECT fechaNacimiento,anioRegistro FROM socio WHERE familia=".$familia. " AND baja=0");
+    while($row = $familia->fetch_assoc()) {
+        $cuotas->data_seek(0);
+        $edad=edad($row["fechaNacimiento"]);
+        while($row_cuota = $cuotas->fetch_assoc()) {
+            if($row_cuota["nuevo"]==0 && $edad>=$row_cuota["edadMin"] && $edad<$row_cuota["edadMax"]){
+                $cuota=$cuota+$row_cuota["tarifa"];
+            }
+            else if($row_cuota["nuevo"]==1 && $edad>=$row_cuota["edadMin"] && $edad<$row_cuota["edadMax"]){
+                $anio_actual = date('Y');
+                if($anio_actual==$row["anioRegistro"]){
+                    $cuota=$cuota+$row_cuota["tarifa"];
+                }
+            }
+        }
+
+    }
+    return $cuota;
+}

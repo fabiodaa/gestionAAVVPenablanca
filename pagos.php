@@ -34,7 +34,7 @@ else{
 <html lang="es">
 
 <head>
-    <title>Familias</title>
+    <title>Pagos</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +44,7 @@ else{
 <body>
     <?php include 'header.php'; ?>
     <div>
-        <h1>Familias</h1>
+        <h1>Pagos</h1>
     </div>
     <div class="busqueda">
         <a href="addFamily.php"><button class="anadir">Nueva familia</button></a>
@@ -75,7 +75,7 @@ else{
         </div>
     </div>
     <div class="listaSocios">
-        <h3>Lista de familias</h3>
+        <h3>Lista de socios</h3>
         <?php
             if($socios->num_rows > 0){
                 echo "<table class=\"socios\" border='1'>";

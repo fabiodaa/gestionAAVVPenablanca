@@ -58,6 +58,11 @@ $cabeza = $cabeza->fetch_assoc();
         <h3><?php echo "Id: " . $row["id"] ?></h3>
         <h3><?php echo "Direccion: " . $row["direccion"] ?></h3>
         <h3><?php echo "Cabeza de familia: " . $cabeza["nombre"] . " " . $cabeza["apellidos"] ?></h3>
+        <h3><?php echo "Cuota ". date('Y') .": " . calcularCuota($row["id"],$conexion). " €" ?></h3>
+        <h3><?php if ($row["ultimoAnioPagado"] == NULL)
+            echo "Último año pagado: Ninguno";
+        else
+            echo "Último año pagado: "+$row["ultimoAnioPagado"]; ?></h3>
         <h3><?php if ($row["baja"] == 1)
             echo "Baja: Sí";
         else
