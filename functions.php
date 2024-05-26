@@ -42,7 +42,9 @@ function calcularCuota($familia,$conexion){
     $cuota=0;
 
     $cuotas= mysqli_query($conexion,"SELECT * FROM tarifa");
-    $familia = mysqli_query($conexion,"SELECT fechaNacimiento,anioRegistro FROM socio WHERE familia=".$familia. " AND baja=0");
+    $sql="SELECT fechaNacimiento,anioRegistro FROM socio WHERE familia=".$familia. " AND baja=0";
+    print($sql);
+    $familia = mysqli_query($conexion,$sql);
     while($row = $familia->fetch_assoc()) {
         $cuotas->data_seek(0);
         $edad=edad($row["fechaNacimiento"]);

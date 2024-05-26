@@ -47,7 +47,7 @@ else{
         <h1>Pagos</h1>
     </div>
     <div class="busqueda">
-        <a href="addFamily.php"><button class="anadir">Nueva familia</button></a>
+        <a href="pdf.php"><button class="anadir">Generar pdf pagos</button></a>
         <h3>Filtros</h3>
         <div class="barrabusqueda">
             <form method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">

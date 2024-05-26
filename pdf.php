@@ -75,6 +75,7 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 while($familia = $familias->fetch_assoc()) {
     $miembros=mysqli_query($conexion,"SELECT anioRegistro,fechaNacimiento FROM socio WHERE baja=0 AND familia=".$familia["id"]);
     $tarifas->data_seek(0);
+    $total=0;
     // Añadir una página
     $pdf->AddPage();
 
@@ -101,9 +102,11 @@ while($familia = $familias->fetch_assoc()) {
             $edad=edad($miembro["fechaNacimiento"]);
             if($tarifa["nuevo"]==0 && $edad>=$tarifa["edadMin"] && $edad<$tarifa["edadMax"]){
                 $num++;
+                $total+=$tarifa["tarifa"];
             }
             else if($tarifa["nuevo"]==1 && $edad>=$tarifa["edadMin"] && $edad<$tarifa["edadMax"] && $miembro["anioRegistro"]==date("Y")){
                 $num++;
+                $total+=$tarifa["tarifa"];
             }
         }
         if($tarifa["nuevo"]==0 && $tarifa["edadMax"]==255){
@@ -125,11 +128,17 @@ $pdf->SetFont('times', '', 15);
 
     }
 
+    // Añadir contenido
+    $texto = "<b><u>Nº DE CUENTA:</u> ES12 2100 7283 8113 0014 3252<br><u>IMPORTE TOTAL:</u> ".$total." €</b>";
+    $pdf->MultiCell(0, 10, $texto, 0, 'L', 0, 1, '', '', true, 0, true, true, 0, 'T', false);
+
+
+    $texto = "<br><br><b><u>Domicilio actual:</u></b> ".$familia["direccion"]." <br><br>Si has cambiado de domicilio notifícalo para que te pueda llegar nuestro periódico.";
+    $pdf->MultiCell(0, 10, $texto, 0, 'L', 0, 1, '', '', true, 0, true, true, 0, 'T', false);
+
 }
 
-// Añadir contenido
-$texto = "<b><u>Nº DE CUENTA:</u> ES12 2100 7283 8113 0014 3252<br><u>IMPORTE TOTAL:</u> ".calcularCuota($familia["id"],$conexion)." €</b>";
-$pdf->MultiCell(0, 10, $texto, 0, 'L', 0, 1, '', '', true, 0, true, true, 0, 'T', false);
+
 
 // Salida del PDF (puede ser descarga o visualización en el navegador)
 $pdf->Output("cuotas ".date("Y").".pdf", 'I'); // 'I' para inline, 'D' para descarga
