@@ -95,6 +95,8 @@ while($familia = $familias->fetch_assoc()) {
     // Añadir contenido
     $texto = "Como sabrás la forma de pago de la CUOTA ANUAL de esta Asociación se realiza mediante el ingreso del importe en la cuenta que tiene abierta en <b>CAIXABANK OFICINA SAN CRISTOBAL.</b><br><br>Deberás especificar en el concepto del pago el nombre del socio que paga la cuota.<br><br>A continuación tienes el número de cuenta y el importe de la <b>cuota anual de ".date("Y").":</b><br>";
     $pdf->MultiCell(0, 10, $texto, 0, 'L', 0, 1, '', '', true, 0, true, true, 0, 'T', false);
+    $pdf->SetFont('times', '', 15);
+
     while($tarifa = $tarifas->fetch_assoc()) {
         $miembros->data_seek(0);
         $num=0;
@@ -119,11 +121,10 @@ while($familia = $familias->fetch_assoc()) {
         }
         
         else if($tarifa["nuevo"]==1){
-            $texto = "- ".$num." cuota(s) nuevo socio (mayores de".$tarifa["edadMin"]." años) - ".$tarifa["tarifa"]." € cada uno más cuota anual";
+            $texto = "- ".$num." cuota(s) nuevo socio (mayores de ".$tarifa["edadMin"]." años) - ".$tarifa["tarifa"]." € cada uno más cuota anual";
             $pdf->MultiCell(0, 10, $texto, 0, 'L', 0, 1, '', '', true, 0, true, true, 0, 'T', false);
         }
 
-$pdf->SetFont('times', '', 15);
 
 
     }

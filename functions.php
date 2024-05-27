@@ -43,7 +43,6 @@ function calcularCuota($familia,$conexion){
 
     $cuotas= mysqli_query($conexion,"SELECT * FROM tarifa");
     $sql="SELECT fechaNacimiento,anioRegistro FROM socio WHERE familia=".$familia. " AND baja=0";
-    print($sql);
     $familia = mysqli_query($conexion,$sql);
     while($row = $familia->fetch_assoc()) {
         $cuotas->data_seek(0);
@@ -62,4 +61,22 @@ function calcularCuota($familia,$conexion){
 
     }
     return $cuota;
+}
+function getEstadoPago($familia,$conexion){
+    $cuota=0;
+
+    $cuotas= mysqli_query($conexion,"SELECT * FROM tarifa");
+    $sql="SELECT ultimoAnioPagado FROM familia WHERE id=".$familia;
+    $ultimoPago="SELECT * FROM pago WHERE familia=".$familia. " ORDER BY fecha DESC LIMIT 1";
+    $familia = mysqli_query($conexion,$sql);
+    $row = $familia->fetch_assoc();
+    $ultimoPagoQuery = mysqli_query($conexion,$sql);
+    $rowPago = $ultimoPagoQuery->fetch_assoc();
+    if($row["ultimoAnioPagado"]==date("Y")){
+        if(calcularCuota($familia,$conexion)==$rowPago["cantidad"]){
+            $estado="Pagado";
+        }else $estado="Falta parte";
+    }else $estado="Pendiente";
+    
+    return $estado;
 }
