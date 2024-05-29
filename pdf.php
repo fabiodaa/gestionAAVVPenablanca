@@ -10,7 +10,13 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
 
 $conexion = connect2db();
 
-$familias=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 ORDER BY apellidos");
+if(isset($_GET["pendientes"])){
+    $familias=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 AND (ultimoAnioPagado!=".date("Y")." OR ultimoAnioPagado IS NULL) ORDER BY apellidos");
+}
+else{
+    $familias=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 ORDER BY apellidos");
+}
+
 $tarifas=mysqli_query($conexion,"SELECT * FROM tarifa ORDER BY nuevo,edadMin");
 
 // Incluir el archivo autoload de Composer para cargar TCPDF

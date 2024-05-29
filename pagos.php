@@ -47,7 +47,9 @@ else{
         <h1>Pagos</h1>
     </div>
     <div class="busqueda">
-        <a href="pdf.php"><button class="anadir">Generar pdf pagos</button></a>
+        <a href="pdf.php"><button class="anadir">Pdf pagos</button></a>
+        <a href="pdf.php?pendientes"><button class="anadir">Pdf pagos pendientes</button></a>
+        <a href="estadisticas.php"><button class="anadir">Estadisticas</button></a>
         <h3>Filtros</h3>
         <div class="barrabusqueda">
             <form method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">

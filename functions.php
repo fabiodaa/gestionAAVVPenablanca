@@ -63,20 +63,65 @@ function calcularCuota($familia,$conexion){
     return $cuota;
 }
 function getEstadoPago($familia,$conexion){
-    $cuota=0;
 
-    $cuotas= mysqli_query($conexion,"SELECT * FROM tarifa");
-    $sql="SELECT ultimoAnioPagado FROM familia WHERE id=".$familia;
+
+    $sql="SELECT id,ultimoAnioPagado FROM familia WHERE id=".$familia;
     $ultimoPago="SELECT * FROM pago WHERE familia=".$familia. " ORDER BY fecha DESC LIMIT 1";
     $familia = mysqli_query($conexion,$sql);
     $row = $familia->fetch_assoc();
-    $ultimoPagoQuery = mysqli_query($conexion,$sql);
+    $ultimoPagoQuery = mysqli_query($conexion,$ultimoPago);
     $rowPago = $ultimoPagoQuery->fetch_assoc();
     if($row["ultimoAnioPagado"]==date("Y")){
-        if(calcularCuota($familia,$conexion)==$rowPago["cantidad"]){
+        if(calcularCuota($row["id"],$conexion)==$rowPago["cantidad"]){
             $estado="Pagado";
         }else $estado="Falta parte";
     }else $estado="Pendiente";
     
     return $estado;
+}
+
+function getCuotaRestante($id,$cuota,$conexion){
+    $restante=$cuota;
+
+    $pagos= mysqli_query($conexion,"SELECT * FROM pago WHERE familia=".$id . " AND anio=".date("Y"));
+    while($pago = $pagos->fetch_assoc()) {
+        $restante-=$pago["cantidad"];
+    }
+    return $restante;
+}
+
+function getDesglose($familia,$conexion){
+    $desglose="";
+
+    $cuotas= mysqli_query($conexion,"SELECT * FROM tarifa");
+    $sql="SELECT fechaNacimiento,anioRegistro FROM socio WHERE familia=".$familia. " AND baja=0";
+    $familia = mysqli_query($conexion,$sql);
+    while($row = $cuotas->fetch_assoc()) {
+        $familia->data_seek(0);
+        $cuota=$row["tarifa"];
+        $num=0;
+        while($row_miembro = $familia->fetch_assoc()) {
+            $edad=edad($row_miembro["fechaNacimiento"]);
+            if($row["nuevo"]==0 && $edad>=$row["edadMin"] && $edad<$row["edadMax"]){
+                $num++;
+            }
+            else if($row["nuevo"]==1 && $edad>=$row["edadMin"] && $edad<$row["edadMax"]){
+                $anio_actual = date('Y');
+                if($anio_actual==$row_miembro["anioRegistro"]){
+                    $num++;
+                }
+            }
+        }
+        if($num>0 && $row["nuevo"]==1){
+            $desglose.=$num." x cuotas nuevo socio - mayores de ".$row["edadMin"]." años(".$row["tarifa"]." €),";
+        } 
+        else if($num>0 && $row["edadMax"]==255){
+            $desglose.=$num." x + de".$row["edadMin"]." años(".$row["tarifa"]." €),";
+        }
+        else if($num>0){
+            $desglose.=$num." x ".$row["edadMin"]."-".$row["edadMax"]." años(".$row["tarifa"]." €),";
+        }
+
+    }
+    return $desglose;
 }

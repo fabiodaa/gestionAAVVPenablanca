@@ -62,7 +62,7 @@ $cabeza = $cabeza->fetch_assoc();
         <h3><?php if ($row["ultimoAnioPagado"] == NULL)
             echo "Último año pagado: Ninguno";
         else
-            echo "Último año pagado: "+$row["ultimoAnioPagado"]; ?></h3>
+            echo "Último año pagado: ".$row["ultimoAnioPagado"]; ?></h3>
         <h3><?php if ($row["baja"] == 1)
             echo "Baja: Sí";
         else
