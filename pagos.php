@@ -47,9 +47,17 @@ else{
         <h1>Pagos</h1>
     </div>
     <div class="busqueda">
-        <a href="pdf.php"><button class="anadir">Pdf pagos</button></a>
-        <a href="pdf.php?pendientes"><button class="anadir">Pdf pagos pendientes</button></a>
         <a href="estadisticas.php"><button class="anadir">Estadisticas</button></a>
+        <div class="barrabusqueda">
+            <form method="get" action="pdf.php">
+                    <h3>Obtener informe de pagos en pdf</h3>
+                    <label for="noDomiciliados">No mostrar domiciliados</label>
+                    <input type="checkbox" id="noDomiciliados" name="noDomiciliados">
+                    <label for="pendientes">Mostrar solo pendientes</label>
+                    <input type="checkbox" id="pendientes" name="pendientes"><br>
+                <input class="confirmar" type="submit" value="Obtener pdf">
+            </form>
+        </div>
         <h3>Filtros</h3>
         <div class="barrabusqueda">
             <form method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
@@ -85,15 +93,22 @@ else{
                 echo "<th>Nº</th>";
                 echo "<th>Dirección</th>";
                 echo "<th>Cabeza de familia</th>";
+                echo "<th>Cuota domiciliada</th>";
                 echo "<th>Cuota ".date("Y")."</th>";
                 echo "<th>Estado</th>";
                 echo "<th>Ver</th>";
                 echo "</tr>";
                 while($row = $socios->fetch_assoc()) {
+                    if($row["domiciliado"]==0){
+                        $domiciliado="No";
+                    }else{
+                        $domiciliado="Sí";
+                    }
                     echo "<tr>";
                     echo "<td>" . $row["id"] . "</td>";
                     echo "<td>" . $row["direccion"] . "</td>";
                     echo "<td>" . $row["nombre"] . " ". $row["apellidos"] ."</td>";
+                    echo "<td>".$domiciliado."</td>";
                     echo "<td>" . calcularCuota($row["id"],$conexion) ." €</td>";
                     echo "<td>" . getEstadoPago($row["id"],$conexion) ."</td>";
                     echo "<td><a href='pago.php?id=" . $row["id"] . "'><button class=\"ver\">Ver</button></a></td>";

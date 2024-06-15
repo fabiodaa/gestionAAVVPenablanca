@@ -11,7 +11,13 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
 $conexion = connect2db();
 
 if(isset($_GET["direccion"])){
-    $query="INSERT INTO familia (direccion) VALUES ('". $_GET["direccion"] ."')";
+    if(isset($_GET["domiciliado"])){
+        $domiciliado=$_GET["domiciliado"];
+    }
+    else{
+        $domiciliado=0;
+    }
+    $query="INSERT INTO familia (direccion,domiciliado) VALUES ('". $_GET["direccion"] ."',".$domiciliado.")";
     
     $socio = mysqli_query($conexion, $query);
     $ultimo_id_familia = mysqli_insert_id($conexion);
@@ -52,6 +58,12 @@ if(isset($_GET["direccion"])){
                     <input required class="texto" placeholder="Dirección"
                         type="text" name="direccion" id="direccion">
                 </div>
+                <br>
+                <div>
+                    <label for="domiciliado">Pago domiciliado</label>
+                    <input type="checkbox" id="domiciliado" name="domiciliado" value="1">
+                </div>
+                <br>
                 <p>Cabeza de familia</p>
                 <div class="campoEdicion">
                     <label for="nombre">Nombre</label>

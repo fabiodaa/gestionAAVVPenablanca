@@ -18,7 +18,13 @@ if (isset($_GET["id"])) {
 }
 
 if(isset($_GET["direccion"])&&isset($_GET["id"])){
-    $conexion -> query("UPDATE familia SET direccion='". $_GET["direccion"] ."' WHERE id=". $_GET["id"]);
+    if(isset($_GET["domiciliado"])){
+        $domiciliado=$_GET["domiciliado"];
+    }
+    else{
+        $domiciliado=0;
+    }
+    $conexion -> query("UPDATE familia SET direccion='". $_GET["direccion"] ."',domiciliado=".$domiciliado." WHERE id=". $_GET["id"]);
     header("location: familia.php?id=". $_GET["id"]);
 }
 
@@ -67,6 +73,10 @@ $cabeza = $cabeza->fetch_assoc();
             echo "Baja: Sí";
         else
             echo "Baja: No"; ?></h3>
+        <h3><?php if ($row["domiciliado"] == 1)
+            echo "Domiciliado: Sí";
+        else
+            echo "Domiciliado: No"; ?></h3>
     </div>
     <div class="contenedor">
         <a <?php echo "href='chStatusFamilia.php?id=" . $row["id"] . "'" ?>><button class="action-button"><?php if ($row["baja"] == 1) {
@@ -77,12 +87,17 @@ $cabeza = $cabeza->fetch_assoc();
         <a <?php echo "href='addSocio.php?familia=" . $row["id"] . "'" ?>><button class="action-button">Añadir socio</button></a>
     </div>
     <div>
-        <h3>Editar direccion</h3>
+        <h3>Editar dirección</h3>
         <form method="get" action="familia.php">
             <div>
                 <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                 <input required class="campoDireccion" <?php echo 'value="' . $row["direccion"] . '"'; ?> placeholder="Dirección"
                     type="text" name="direccion" id="direccion">
+            </div>
+            <br>
+            <div>
+                <label for="domiciliado">Pago domiciliado</label>
+                <input type="checkbox" <?php if($row["domiciliado"]==1) echo "checked" ?> id="domiciliado" name="domiciliado" value="1">
             </div>
             <div>
                 <input class="confirmar" type="submit" value="Confirmar">

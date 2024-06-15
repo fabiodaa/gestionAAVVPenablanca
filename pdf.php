@@ -10,8 +10,14 @@ if (!isset($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"] == true) {
 
 $conexion = connect2db();
 
-if(isset($_GET["pendientes"])){
+if(isset($_GET["pendientes"])&&isset($_GET["noDomiciliados"])){
+    $familias=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 AND (ultimoAnioPagado!=".date("Y")." OR ultimoAnioPagado IS NULL) AND domiciliado=0 ORDER BY apellidos");
+}
+elseif(isset($_GET["pendientes"])){
     $familias=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 AND (ultimoAnioPagado!=".date("Y")." OR ultimoAnioPagado IS NULL) ORDER BY apellidos");
+}
+elseif(isset($_GET["noDomiciliados"])){
+    $familias=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 AND domiciliado=0 ORDER BY apellidos");
 }
 else{
     $familias=mysqli_query($conexion,"SELECT * FROM cabezaFamilia WHERE baja=0 ORDER BY apellidos");
