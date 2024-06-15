@@ -22,12 +22,16 @@ $numFamilias = mysqli_fetch_assoc($numFamilias)["num"];
 $numFamiliasAlta=mysqli_query($conexion,"SELECT COUNT(*) AS num FROM familia WHERE baja=0");
 $numFamiliasAlta = mysqli_fetch_assoc($numFamiliasAlta)["num"];
 
-$familias=mysqli_query($conexion,"SELECT id FROM familia");
-$numFamilias = mysqli_fetch_assoc($numFamilias)["num"];
+$familias=mysqli_query($conexion,"SELECT id FROM familia WHERE baja=0");
 
 $cuotaTotal=0;
 $cuotaRestante=0;
 
+while($row = $familias->fetch_assoc()) {
+    $cuota=calcularCuota($row["id"],$conexion);
+    $cuotaTotal+=$cuota;
+    $cuotaRestante+=getCuotaRestante($row["id"],$cuota,$conexion);
+}
 
 
 ?>
@@ -57,6 +61,23 @@ $cuotaRestante=0;
         <div class="campo">
             <p>Número de socios de alta:</p>
             <p><?php echo $numSociosAlta ?></p>
+        </div>
+        <div class="campo">
+            <p>Número de familias total:</p>
+            <p><?php echo $numFamilias ?></p>
+        </div>
+        <div class="campo">
+            <p>Número de familias de alta:</p>
+            <p><?php echo $numFamiliasAlta ?></p>
+        </div>
+        <div class="campo">
+            <p>Cuotas totales 2024:</p>
+            <p><?php echo $cuotaTotal." €" ?></p>
+        </div>
+        <div class="campo">
+            <p>Cuotas restantes 2024:</p>
+            <p><?php echo $cuotaRestante." €" ?></p>
+        </div>
     </div>
 
 
