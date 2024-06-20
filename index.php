@@ -36,7 +36,7 @@
                     <?php
                 }else{
                     ?>
-                    <input class="texto" required placeholder="Contraseña" type="password" name="password" id="password">
+                    <input class="texto" autocomplete="current-password" required placeholder="Contraseña" type="password" name="password" id="password">
                     <?php
                 }
             ?>
