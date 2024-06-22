@@ -95,8 +95,8 @@ $desglose=getDesglose($row["id"],$conexion);
                         placeholder="Fecha" type="date" name="fecha" id="fecha"><br>
                 </div>
                 <p class="etiqueta">Método de pago</p>
-                <input class="opcion" type="radio" id="metodo" name="metodo" value="Efectivo">
-                <label for="efectivo">Efectivo</label>
+                <input class="opcion" type="radio" id="metodo" name="metodo" value="Domiciliado">
+                <label for="domiciliado">Domiciliado</label>
                 <input class="opcion" checked type="radio" id="metodo" name="metodo" value="Transferencia">
                 <label for="transferencia">Transferencia</label>
                 <div class="campoEdicion">
