@@ -69,7 +69,7 @@ $esCabeza=$cabeza->fetch_assoc();
         </div>
         <div class="campo">
             <p>Familia:</p>
-            <p><?php echo $row["familia"] ?></p>
+            <a <?php echo "href='familia.php?id=" . $row["familia"] . "'" ?>><button class="action-button"><?php echo $row["familia"]  ?></button></a>
         </div>
         <div class="campo">
             <p>Baja:</p>
