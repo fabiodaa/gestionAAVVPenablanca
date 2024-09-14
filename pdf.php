@@ -29,8 +29,10 @@ $tarifas=mysqli_query($conexion,"SELECT * FROM tarifa ORDER BY nuevo,edadMin");
 // Incluir el archivo autoload de Composer para cargar TCPDF
 require_once('vendor/autoload.php');
 
+use com\tecnick\pdf\TcpdfFpdi;
+
 // Extender la clase TCPDF para crear encabezado y pie de página personalizados
-class MYPDF extends TCPDF {
+class MYPDF extends TcpdfFpdi {
     // Encabezado de página
     public function Header() {
         // Logo
