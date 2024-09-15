@@ -31,7 +31,7 @@ require_once('vendor/autoload.php');
 
 
 // Extender la clase TCPDF para crear encabezado y pie de página personalizados
-class MYPDF extends \Com\Tecnick\Pdf\Tcpdf {
+class MYPDF extends Tcpdf {
     // Encabezado de página
     public function Header() {
         // Logo
